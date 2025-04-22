@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Todo List</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<header class="header">
+		
+		<a class="site">TodoList</a>	
+
+		<div class="btns">
+			<button class="btn-darkmode" id="darkMode">Dark</button>
+			<button class="btn-lightmode" id="lightMode">Light</button>
+		</div>
+
+	</header>
+
+
+	<div class="container">
+		
+		<div class="create">
+				
+			<input type="text" name="task" id="task_input" placeholder="Task...">
+
+			<button class="create_btn">Create</button>
+
+		</div>
+		<div class="tasks">
+			<div class="head">
+				<span class="task-content">Title</span>
+				<span class="date">Date</span>
+				<span class="oprs">Actions</span>	
+			</div>
+			
+
+		</div>
+
+	</div>
+
+
+	<div class="alert hidden">
+		<div class="head"><span class="title">Info</span> <span class="close" onclick="Window.closeMessage();">x</span></div>
+		<p class="inner">Test Message</p>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>
