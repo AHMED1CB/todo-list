@@ -29,10 +29,30 @@
 			<button class="create_btn">Create</button>
 
 		</div>
+
+		<div class="filters">
+			<div class="filter">
+				<button data-filter="all" class="filter-btn Active Filter active">All</button>
+			</div>
+
+			<div class="filter">
+				<button data-filter="uncompleted" class="filter-btn Active Filter">Un Completed</button>
+			</div>
+
+			<div class="filter">
+				<button data-filter="completed" class="filter-btn Active Filter">Completed</button>
+			</div>
+
+
+
+		</div>
+
+
+		<h2 class="heading">All Tasks</h2>
 		<div class="tasks">
 			<div class="head">
 				<span class="task-content">Title</span>
-				<span class="date">Date</span>
+				<span class="date">Creation Date</span>
 				<span class="oprs">Actions</span>	
 			</div>
 			
@@ -42,7 +62,7 @@
 	</div>
 
 
-	<div class="alert hidden">
+	<div class="alert hidden" >
 		<div class="head"><span class="title">Info</span> <span class="close" onclick="Window.closeMessage();">x</span></div>
 		<p class="inner">Test Message</p>
 	</div>

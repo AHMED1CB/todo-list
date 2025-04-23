@@ -7,7 +7,7 @@
 	--danger: #f66;
 	--darkBtn: #222;
 	--lightBtn: #fff;
-
+	--darkTxt: #222;
 }
 
 
@@ -24,6 +24,7 @@ body{
 	background: var(--bg);
 	color: var(--text);
 	font-family: 'Consolas';
+	position: relative;
 }
 
 ::-webkit-scrollbar{
@@ -62,7 +63,7 @@ header button.btn-lightmode{
 
 
 .container{
-	width: 80%;
+	width: 95%;
 	height: 80%;
 	display: flex;
 	align-items: center;
@@ -189,7 +190,7 @@ header button.btn-lightmode{
 	min-height: 150px;
 	height: fit-content;
 	border: 1px solid var(--border);
-	position: fixed;
+	position: absolute;
 	left: 50%;
 	top: 20%;
 	transform: translateX(-50%);
@@ -199,6 +200,8 @@ header button.btn-lightmode{
 	padding: 5px 10px;
 	transition: .5s;
 	opacity: 0;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .alert .head{
@@ -233,6 +236,7 @@ header button.btn-lightmode{
 
 .alert .inner{
 	text-align: center;
+
 }
 
 
@@ -248,4 +252,52 @@ button{
 
 div,body{
 	transition: .2s background;
+}
+
+
+
+.filters{
+	display: flex;
+	width: fit-content;
+	margin: auto;
+	align-items: center;
+	justify-content: center;
+	gap: 40px;
+	padding: 10px 20px;
+	border-radius: 8px;
+	border: 1px solid var(--border);	
+}
+
+.filters button{
+	padding: 10px 15px;
+	border-radius: 8px;
+	background: var(--bg);
+	color: #fff;
+	outline: none;
+	border: 1px solid var(--border);
+	transition: .3s;
+	background: var(--btn);
+}
+
+
+.filters button:hover , .filters button.active {
+	background: var(--darkBtn);
+
+	color: var(--lightTxt);
+}
+
+
+
+@media(max-width: 767px){
+	.task .oprs{
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+}
+
+
+.heading{
+	margin: 30px 0;
+	text-transform: capitalize;
 }

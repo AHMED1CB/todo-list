@@ -1,11 +1,13 @@
 # todo-list
-Simple Todo list Website 
+<p>Simple Todo list Website</p>
 
 ## Features
 <h4>Add Tasks</h4>
 <h4>Delete Task</h4>
 <h4>Update Task</h4>
-<h4>Save Tasks</h4>
+<h4>Save Tasks In localStorage</h4>
+<h4>Complete Tasks</h4>
+<h4>Switch Page mode</h4>
 
 ## Teach
 <h4>HTML</h4>
