@@ -8,6 +8,7 @@
 <h4>Save Tasks In localStorage</h4>
 <h4>Complete Tasks</h4>
 <h4>Switch Page mode</h4>
+<h4>Customize Page Colors</h4>
 
 ## Teach
 <h4>HTML</h4>

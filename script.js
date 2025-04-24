@@ -2,7 +2,6 @@ function selectAll(selector){
 	return document.querySelectorAll(selector);
 }
 
-
 function select(selector){
 	return document.querySelector(selector);
 }
@@ -13,39 +12,22 @@ const tasksContainer = select('div.tasks');
 const messageBox = select('.alert');
 const messageTitle = select('.alert .title');
 const messageContent = select('.alert .inner');
+
 const darkModeBtn = select('#darkMode');
 const lightModeBtn = select('#lightMode');
 const root = document.documentElement;
+
 const filters = selectAll('.filters button');
 const heading = select('.heading')
 
+const cusomizeBtn = select('.customize button.toggle')
+const cusomizeContainer = select('.customize .contents')
+const colorsItems = selectAll('.customize .contents > ul > li > ul > li')
+const reset = select('.reset')
+
+
+
 let currentFilter = 'all';
-
-createBtn.onclick = createTask;
-
-function createTask(){
-	if (inputTask.value.trim()){
-		new Task(inputTask.value);
-		inputTask.value = '';
-	}else{
-		Window.showMessage('Warning' , "Please Enter The Task First");
-	}
-
-}
-
-
-function updateTask(id) {
-	let task = Task.getById(id);
-
-	inputTask.value = task.title;
-
-	createBtn.innerHTML = 'Update';
-	if (inputTask.value.trim()){
-		createBtn.onclick = () => Task.updateTask(inputTask.value , id);
-	}
-
-}
-
 
 
 class Window{
@@ -76,6 +58,16 @@ class Window{
 			
 		}
 	
+	static vars = {
+				"--bg": localStorage['--bg'],
+				"--text": localStorage['--text'],
+				"--btn": localStorage['--btn'],
+				"--lightTxt": localStorage['--lightTxt'],
+				"--border": localStorage['--border'],
+				"--darkBtn": localStorage['--darkBtn'],
+				"--lightBtn": localStorage['--lightBtn'],			
+		};
+
 	static showMessage(title , message){
 		messageTitle.innerHTML = title;
 		messageContent.innerHTML = message;
@@ -107,44 +99,42 @@ class Window{
 		
 	}
 
+	static toggleCustomize(){
 
-}
+		let left = cusomizeContainer.style.left;
 
 
 
 
-if (localStorage.mode){
-	Window.setMode(localStorage.mode)
+		if (left === '-100%'){
+			cusomizeContainer.style.left = 0
+		}else{
+			cusomizeContainer.style.left = '-100%'
+		}
 
-	if (localStorage.mode == 'light'){
-		darkModeBtn.style.display = 'block';
-		lightModeBtn.style.display = 'none';
-	}else{
-		darkModeBtn.style.display = 'none';
-		lightModeBtn.style.display = 'block';
-		
+	}
+
+	static setVar(name , value){
+		root.style.setProperty(name , value);
+		localStorage[name] = value;
+	}
+
+
+	static resetTheme(){
+		applyLightMode();
+
+		Object.keys(Window.vars).forEach(item => {
+			localStorage.removeItem(item)
+		})
+
+
+
+
 	}
 
 }
 
 
-darkModeBtn.onclick = () => {
-	Window.setMode('dark')
-	darkModeBtn.style.display = 'none';
-	lightModeBtn.style.display = 'block';
-	localStorage.mode = 'dark';
-
-};
-lightModeBtn.onclick = () => {
-	Window.setMode('light')
-
-	darkModeBtn.style.display = 'block';
-	lightModeBtn.style.display = 'none';
-
-	localStorage.mode = 'light';
-
-
-};
 
 
 class Task{
@@ -350,9 +340,113 @@ class Task{
 
 }
 
+
+
+
+
+createBtn.onclick = createTask;
+
+function createTask(){
+	if (inputTask.value.trim()){
+		new Task(inputTask.value);
+	
+		inputTask.value = '';
+	
+	}else{
+	
+		Window.showMessage('Warning' , "Please Enter The Task First");
+	
+	}
+
+}
+
+
+function updateTask(id) {
+	
+	let task = Task.getById(id);
+
+	inputTask.value = task.title;
+
+	createBtn.innerHTML = 'Update';
+	if (inputTask.value.trim()){
+		createBtn.onclick = () => Task.updateTask(inputTask.value , id);
+	}
+
+}
+
+
+
+
+colorsItems.forEach(item => {
+	item.style.background = item.dataset.color
+	item.onclick = () => {
+		Window.setVar(item.parentElement.dataset.var , item.dataset.color);
+	}
+})
+
+
+if (localStorage.mode){
+	Window.setMode(localStorage.mode)
+
+	if (localStorage.mode == 'light'){
+		darkModeBtn.style.display = 'block';
+		lightModeBtn.style.display = 'none';
+	}else{
+		darkModeBtn.style.display = 'none';
+		lightModeBtn.style.display = 'block';
+		
+	}
+
+}
+
+cusomizeBtn.onclick = Window.toggleCustomize;
+
+
+darkModeBtn.onclick = applyDarkMode ; 
+
+function applyDarkMode () {
+	Window.setMode('dark')
+
+	darkModeBtn.style.display = 'none';
+
+	lightModeBtn.style.display = 'block';
+
+	localStorage.mode = 'dark';
+
+};
+
+lightModeBtn.onclick = applyLightMode ; 
+
+function applyLightMode()  {
+	Window.setMode('light')
+
+	darkModeBtn.style.display = 'block';
+
+	lightModeBtn.style.display = 'none';
+
+	localStorage.mode = 'light';
+
+
+};
+
+
+Object.keys(Window.vars).forEach((name) => {
+
+	if (Window.vars[name]){
+		Window.setVar(name , Window.vars[name])
+	}
+
+})
+
+
+reset.onclick = () => {
+	Window.resetTheme();
+}
+
+
 window.onload = () => {
 	if(localStorage.tasks){
-		Task.renderAll()
+		Task.renderAll({filter: currentFilter})
 	}
 }
 

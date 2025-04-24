@@ -301,3 +301,77 @@ div,body{
 	margin: 30px 0;
 	text-transform: capitalize;
 }
+
+
+.customize > button{
+	border-radius: 8px;
+	padding: 10px 15px;
+	background: var(--bg);
+	color: var(--text);
+	border:1px solid var(--border);
+	outline: none;
+	margin: 20px;
+}
+
+
+.customize > .contents{
+	width: 350px;
+	height: 80vh;
+	overflow:auto ;
+	position: fixed;
+	z-index: 6;
+	background: var(--bg);
+	padding: 14px;
+	border-radius: 12px;
+	border: 1px solid var(--border);
+	transition: .4s;
+}
+
+ul{
+	list-style: none;
+}
+.contents > ul{
+	display: flex;
+	list-style: none;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: auto;
+	height: 100%;
+}
+
+.contents > ul > li{
+	margin:  12px 0;
+	padding: 12px 0;
+	text-align: center;
+	border-bottom: 1px solid var(--border);
+}
+
+
+.contents > ul > li > ul {
+	display: flex;
+	padding: 10px;
+	width: 90%;
+	border-radius: 8px;
+	border: 1px solid var(--border);
+	margin: 12px auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.contents > ul > li > ul li{
+	width: 50px;
+	height: 50px;
+	margin: 0 5px;
+	cursor: pointer;
+	border: 1px solid var(--border);
+	border-radius: 4px;
+}
+
+.reset{
+	padding: 10px 15px;
+	background: var(--bg);
+	color: var(--text);
+	border-radius: 8px;
+	border: 1px solid var(--border);
+}
+
